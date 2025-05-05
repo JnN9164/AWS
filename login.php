@@ -6,34 +6,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    
+
     $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
 
-    
+
     $query = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
 
-        
+
         if (password_verify($password, $user['password'])) {
-            
-            
+ 
+
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];  
+            $_SESSION['role'] = $user['role'];
 
-            
+ 
             if ($user['role'] == 'admin') {
-                header('Location: admin/index.php'); 
+                header('Location: admin/index.php');
             } else {
-                header('Location: index.php'); 
+                header('Location: index.php');
             }
             exit();
         } else {
-            echo "Incorrect password.";
+             echo "Incorrect password.";
         }
     } else {
         echo "User not found.";
@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-    <!-- Navbar -->
+   <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Graduation Store</a>
@@ -149,6 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
 
     <!-- Login Form -->
+     <!-- Login Form -->
     <div class="container">
         <h2>Login</h2>
         <?php if (!empty($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
