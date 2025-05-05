@@ -55,7 +55,7 @@ error_log("Image path: " . $fullImagePath);
     <h2 class="mb-4"><?php echo $product['name']; ?></h2>
     <div class="row">
       <div class="col-md-6">
-      <img src="<?= https://graduation-bucket-69.s3.us-east-1.amazonaws.com/.$product['image']; ?>" alt="<?= $product['name'] ?>" class="img-fluid">
+      <img src="<?= $imgPath . $product['image']; ?>" alt="<?= $product['name'] ?>" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h4>RM <?php echo number_format($product['price'], 2); ?></h4>
