@@ -1,48 +1,9 @@
 <?php
-/*session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
-    $payment_method = htmlspecialchars($_POST['payment_method'] ?? '');
-    $_SESSION['payment_method'] = $payment_method;
-
-    if ($payment_method === 'Cash') {
-        echo json_encode([
-            'status' => 'success',
-            'payment_status' => 'Payment confirmed via Cash.',
-            'qr_code_url' => null,
-            'message' => 'Payment successful! You will be redirected to your order shortly.'
-        ]);
-    } elseif ($payment_method === 'E-Wallet') {
-        echo json_encode([
-            'status' => 'success',
-            'payment_status' => 'Payment confirmed via E-Wallet. Please scan the QR code.',
-            'qr_code_url' => 'https://api.qrserver.com/v1/create-qr-code/?data=E-WalletPayment&size=150x150',
-            'message' => 'Please scan the QR code.'
-        ]);
-    } elseif ($payment_method === 'Card') {
-        echo json_encode([
-            'status' => 'success',
-            'payment_status' => 'Payment confirmed via Card. Please provide your card details.',
-            'qr_code_url' => null,
-            'message' => 'Please fill in your card details.'
-        ]);
-    } else {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Please select a payment method.'
-        ]);
-    }
-    exit;
-}*/
 
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-//require 'db_connection.php'; 
+//require 'db_connection.php';
 
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
@@ -52,7 +13,17 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $cart = $_SESSION['cart'] ?? [];
 $total = 0;
-$conn = mysqli_connect("localhost", "root", "", "graduation_store"); 
+
+$host = 'graduation.cp8dkm9ksdvu.us-east-1.rds.amazonaws.com';
+$user = 'admin';
+$pass = 'nbuser123';
+$db = 'graduation_store';
+
+$conn = mysqli_connect($host, $user, $pass, $db);
+
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
 foreach ($cart as $product_id => $qty) {
   $result = mysqli_query($conn, "SELECT * FROM products WHERE id = $product_id");
@@ -64,14 +35,13 @@ foreach ($cart as $product_id => $qty) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['place_order'])) {
     header('Content-Type: application/json');
     $payment_method = htmlspecialchars($_POST['payment_method'] ?? '');
-    $_SESSION['payment_method'] = $payment_method;
 
-    if ($payment_method === 'Cash' || $payment_method === 'E-Wallet' || $payment_method === 'Card') {
-        
+     if ($payment_method === 'Cash' || $payment_method === 'E-Wallet' || $payment_method === 'Card') {
+
         $escaped_payment_method = mysqli_real_escape_string($conn, $payment_method);
         mysqli_query($conn, "INSERT INTO orders (user_id, total_price, payment_method) VALUES ($user_id, $total, '$escaped_payment_method')");
         //mysqli_query($conn, "INSERT INTO orders (user_id, total_price, payment_method, total, status) VALUES ($user_id, $total, '$payment_method')");
-        
+
         $order_id = mysqli_insert_id($conn);
 
         mysqli_query($conn, "UPDATE orders SET status = 'paid' WHERE id = $order_id");
@@ -82,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['place_order'])) {
             mysqli_query($conn, "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ($order_id, $product_id, $qty, $price)");
         }
 
-        unset($_SESSION['cart']); 
+        unset($_SESSION['cart']);
 
         if ($payment_method === 'Cash') {
             echo json_encode([
@@ -102,7 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['place_order'])) {
             echo json_encode([
                 'status' => 'success',
                 'payment_status' => 'Payment confirmed via Card. Please provide your card details.',
-                'qr_code_url' => null,
+
+                                'qr_code_url' => null,
                 'message' => 'Please fill in your card details.'
             ]);
         }
@@ -187,8 +158,7 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
             Swal.showLoading();
         }
     });
-
-    fetch('', {
+   fetch('', {
         method: 'POST',
         body: formData
     })
@@ -259,7 +229,7 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
                 });
             }
 
-            if (paymentMethod === 'E-Wallet') {
+          if (paymentMethod === 'E-Wallet') {
                 setTimeout(function() {
                     Swal.fire({
                         icon: 'success',
@@ -270,7 +240,7 @@ document.getElementById('paymentForm').addEventListener('submit', function(event
                     }).then(function() {
                         window.location.href = "order_history.php";  // Redirect to order history after payment
                     });
-                }, 5000); 
+                }, 5000);
             }
 
         } else {
