@@ -16,7 +16,6 @@ $order_id = intval($_GET['order_id']);
 
 $order_query = mysqli_query($conn, "SELECT * FROM orders WHERE id = $order_id");
 $order = mysqli_fetch_assoc($order_query);
-
 if (!$order) {
   echo "<div style='padding: 50px; text-align: center;'>Order not found.</div>";
   exit();
@@ -33,7 +32,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
 <head>
   <meta charset="UTF-8">
   <title>Order Details - Graduation Store</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -46,7 +45,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
     }
 
     .navbar-brand {
-      font-size: 1.8rem;
+font-size: 1.8rem;
       font-weight: 600;
     }
 
@@ -62,7 +61,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
 
     .container {
       padding: 80px 15px;
-    }
+}
 
     h2 {
       font-size: 2.5rem;
@@ -79,7 +78,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
     }
 
     .table th {
-      background-color: #34495e;
+ background-color: #34495e;
       color: white;
       font-weight: 600;
       text-align: center;
@@ -96,7 +95,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
       border-radius: 8px;
       padding: 8px 16px;
       font-weight: 500;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+ transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .btn-info:hover {
@@ -109,7 +108,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
         overflow-x: auto;
       }
     }
-  </style>
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -125,7 +124,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
         <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
         <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
       </ul>
-    </div>
+</div>
   </div>
 </nav>
 
@@ -142,7 +141,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Product</th>
+<th>Product</th>
         <th>Price (RM)</th>
         <th>Quantity</th>
         <th>Subtotal (RM)</th>
@@ -159,8 +158,7 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
       <?php } ?>
     </tbody>
   </table>
-
-  <a href = "view_orders.php" class="btn btn-secondary mt-3">Back to Orders</a>
+<a href = "view_orders.php" class="btn btn-secondary mt-3">Back to Orders</a>
 </div>
 </body>
 </html>
