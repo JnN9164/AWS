@@ -117,7 +117,7 @@ $result = mysqli_query($conn, $query);
     </div>
   </div>
 </nav>
-
+  
 <div class="container">
   <h2>Your Order History</h2>
 
@@ -132,7 +132,7 @@ $result = mysqli_query($conn, $query);
         </tr>
       </thead>
       <tbody>
-        <?php 
+        <?php
         if (mysqli_num_rows($result) > 0):
           while ($order = mysqli_fetch_assoc($result)): ?>
             <tr>
@@ -154,5 +154,5 @@ $result = mysqli_query($conn, $query);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
+<?php include 'footer.php'?>
 </html>
