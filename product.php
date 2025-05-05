@@ -2,7 +2,7 @@
 session_start();
 include 'config.php';
 
-$product_id = $_GET['id']; 
+$product_id = $_GET['id'];
 $query = "SELECT * FROM products WHERE id = $product_id";
 $result = mysqli_query($conn, $query);
 $product = mysqli_fetch_assoc($result);
@@ -11,10 +11,10 @@ if (!$product) {
   echo "Product not found!";
   exit();
 
- 
+
 
 }
-$imgPath = "cloud/uploads/";
+$imgPath = "image/";
 $fullImagePath = $imgPath . $product['image'];
 error_log("Image path: " . $fullImagePath);
 ?>
@@ -51,11 +51,11 @@ error_log("Image path: " . $fullImagePath);
     </div>
   </nav>
   
-  <div class="container py-5">
+<div class="container py-5">
     <h2 class="mb-4"><?php echo $product['name']; ?></h2>
     <div class="row">
       <div class="col-md-6">
-      <img src="<?= $imgPath.$product['image']; ?>" alt="<?= $product['name'] ?>" class="img-fluid">
+      <img src="<?= https://graduation-bucket-69.s3.us-east-1.amazonaws.com/.$product['image']; ?>" alt="<?= $product['name'] ?>" class="img-fluid">
       </div>
       <div class="col-md-6">
         <h4>RM <?php echo number_format($product['price'], 2); ?></h4>
