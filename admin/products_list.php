@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $query = "SELECT * FROM products";
 $result = mysqli_query($conn, $query);
 
-$imgPath = "../cloud/uploads/";
+$imgPath = "../image/";
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +33,7 @@ $imgPath = "../cloud/uploads/";
     .navbar {
       background-color: #003366;
     }
-
-    .navbar-brand, .nav-link {
+ .navbar-brand, .nav-link {
       color: #ffffff !important;
       font-weight: 600;
     }
@@ -50,8 +49,7 @@ $imgPath = "../cloud/uploads/";
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-
-    h2 {
+ h2 {
       font-weight: 600;
       color: #003366;
       margin-bottom: 30px;
@@ -66,8 +64,7 @@ $imgPath = "../cloud/uploads/";
     .btn-warning {
       font-weight: 600;
     }
-
-    .btn-danger {
+ .btn-danger {
       font-weight: 600;
     }
 
@@ -84,7 +81,7 @@ $imgPath = "../cloud/uploads/";
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">Admin Panel</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+ <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -102,7 +99,7 @@ $imgPath = "../cloud/uploads/";
   <h2 class="text-center">Product List</h2>
 
   <?php if (isset($_SESSION['message'])): ?>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
       <?= $_SESSION['message']; ?>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -119,7 +116,7 @@ $imgPath = "../cloud/uploads/";
           <th>Price (RM)</th>
           <th>Image</th>
           <th>Actions</th>
-        </tr>
+ </tr>
       </thead>
       <tbody>
         <?php while ($product = mysqli_fetch_assoc($result)): ?>
@@ -136,8 +133,8 @@ $imgPath = "../cloud/uploads/";
               <?php endif; ?>
             </td>
             <td>
-              <a href="edit_product.php?id=<?= $product['id']; ?>" class="btn btn-warning btn-sm mb-1">Edit</a>
-              <a href="delete_product.php?id=<?= $product['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+   <a href="edit_product.php?id=<?= $product['id']; ?>" class="btn btn-warning btn-sm mb-1">Edit</a>
+              <a href="delete_product.php?id=<?= $product['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to d>
             </td>
           </tr>
         <?php endwhile; ?>
