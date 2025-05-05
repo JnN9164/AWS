@@ -6,20 +6,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    
+
     $username = mysqli_real_escape_string($conn, $username);
     $password = mysqli_real_escape_string($conn, $password);
 
-    
+
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-   
+
     $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$hashed_password', 'user')";
     mysqli_query($conn, $query);
     
     echo "<div class='alert alert-success'>User registered successfully!</div>";
 
-    
+
 }
 ?>
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Signup - Graduation Store</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -44,8 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .navbar-brand {
             font-weight: 600;
         }
-
-        .container {
+        
+.container {
             background-color: white;
             padding: 40px;
             margin-top: 100px;
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         button:hover {
-            background-color: #0056b3;
+background-color: #0056b3;
         }
 
         .navbar-nav .nav-link {
@@ -113,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </style>
 </head>
-
 <body>
 
     <!-- Navbar -->
@@ -131,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
                         <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+    <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="signup.php">Signup</a></li>
                     <?php endif; ?>
                 </ul>
@@ -148,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label class="form-label" for="username">Username</label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username" required>
             </div>
-            <div class="mb-3">
+<div class="mb-3">
                 <label class="form-label" for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" required>
             </div>
