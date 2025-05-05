@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
+ <style>
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f2f4f7;
@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
     h2 {
       font-size: 2.5rem;
-      font-weight: 600;
+font-weight: 600;
       color: #004d99;
       text-align: center;
     }
@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
     .list-group-item:hover {
       background-color: #0069d9;
-      color: #fff;
+color: #fff;
       transform: scale(1.05);
     }
 
@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
       font-size: 1rem;
       font-weight: 500;
       background-color: #e3f2fd;
-      color: #1565c0;
+color: #1565c0;
     }
 
     .card {
@@ -78,7 +78,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
       color: #fff;
       font-weight: 600;
       border-radius: 12px 12px 0 0;
-    }
+}
 
     .card-body {
       padding: 20px;
@@ -96,7 +96,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
     .btn-custom:hover {
       background-color: #003366;
-      color: #f8f9fa;
+color: #f8f9fa;
     }
 
     .btn-logout {
@@ -112,7 +112,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     .btn-logout:hover {
       background-color: #c82333;
       color: #f8f9fa;
-    }
+   }
 
     .alert-success {
       background-color: #d4edda;
@@ -125,7 +125,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 <body>
 
   <div class="container">
-    <h2>Admin Dashboard</h2>
+ <h2>Admin Dashboard</h2>
 
     <?php if (isset($_SESSION['message'])): ?>
       <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
@@ -142,7 +142,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
       <div class="card-body">
         <ul class="list-group">
           <li class="list-group-item"><a href="products_list.php">Edit Product</a></li>
-          <li class="list-group-item"><a href="view_orders.php">View Orders</a></li>
+<li class="list-group-item"><a href="view_orders.php">View Orders</a></li>
+           <li class="list-group-item"><a href="user.php">Customers</a></li>
         </ul>
       </div>
     </div>
@@ -158,7 +159,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     // 自动关闭提示框（3秒后）
     setTimeout(() => {
       const alertEl = document.querySelector('.alert');
-      if (alertEl) {
+ if (alertEl) {
         const alert = new bootstrap.Alert(alertEl);
         alert.close();
       }
