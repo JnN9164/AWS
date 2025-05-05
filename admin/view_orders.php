@@ -7,7 +7,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
   exit();
 }
 
-$query = "SELECT * FROM orders ORDER BY created_at DESC";
+$query = "SELECT orders.*, users.username
+          FROM orders
+          JOIN users ON orders.user_id = users.id
+          ORDER BY orders.created_at DESC";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -30,7 +33,7 @@ $result = mysqli_query($conn, $query);
 
     .navbar-brand, .nav-link {
       color: #ffffff !important;
-      font-weight: 600;
+font-weight: 600;
     }
 
     .nav-link:hover {
@@ -47,7 +50,7 @@ $result = mysqli_query($conn, $query);
 
     h2 {
       font-weight: 600;
-      color: #003366;
+color: #003366;
       margin-bottom: 30px;
     }
 
@@ -77,11 +80,14 @@ $result = mysqli_query($conn, $query);
         <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
       </ul>
     </div>
-  </div>
 </nav>
 
 <!-- Content -->
 <div class="container">
+<div class="d-flex justify-content-between">
+                            <a href="index.php" class="btn btn-secondary">← Back</a>
+
+                        </div>
   <h2 class="text-center">Order Management</h2>
 
   <div class="table-responsive">
@@ -89,7 +95,7 @@ $result = mysqli_query($conn, $query);
       <thead class="table-dark">
         <tr>
           <th>Order ID</th>
-          <th>User ID</th>
+<th>User Name</th>
           <th>Total Price (RM)</th>
           <th>Date</th>
           <th>Details</th>
@@ -99,14 +105,14 @@ $result = mysqli_query($conn, $query);
         <?php while ($order = mysqli_fetch_assoc($result)): ?>
           <tr>
             <td><?= $order['id']; ?></td>
-            <td><?= $order['user_id']; ?></td>
+             <td><?= htmlspecialchars($order['username']); ?></td>
             <td>RM <?= number_format($order['total_price'], 2); ?></td>
             <td><?= $order['created_at']; ?></td>
             <td>
               <a href="admin_order_details.php?order_id=<?= $order['id']; ?>" class="btn btn-info btn-sm">View</a>
-              
+
             </td>
-          </tr>
+  </tr>
         <?php endwhile; ?>
       </tbody>
     </table>
