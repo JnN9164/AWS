@@ -1,5 +1,5 @@
 <?php include 'config.php'; session_start();
-$imgPath = '/cloud/uploads/';
+$imgPath = 'image/';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -153,7 +153,7 @@ $imgPath = '/cloud/uploads/';
           <div class='card h-100'>
             <img src='" . $imgPath . "{$row['image']}' class='card-img-top' alt='{$row['name']}'>
             <div class='card-body'>
-              <h5 class='card-title'>{$row['name']}</h5>
+             <h5 class='card-title'>{$row['name']}</h5>
               <p class='card-text'>{$row['description']}</p>
               <p class='price'>RM {$row['price']}</p>
               <form action='cart.php' method='POST' id='cartForm-{$row['id']}'>
@@ -171,9 +171,8 @@ $imgPath = '/cloud/uploads/';
     </div>
   </div>
 
-  <footer>
-    <p>&copy; <?php echo date('Y'); ?> Graduation Store. All rights reserved.</p>
-  </footer>
+
+ <?php include 'footer.php'?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -189,7 +188,7 @@ $imgPath = '/cloud/uploads/';
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            // Update cart count
+           // Update cart count
             document.getElementById('cart-count').textContent = data.cart_count;
 
             // Show SweetAlert success message
