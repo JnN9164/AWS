@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../config.php';
+include 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
   header("Location: login.php");
@@ -132,8 +132,8 @@ $items_query = mysqli_query($conn, "SELECT order_items.*, products.name, product
 
 <div class="container mt-5">
   <h2>Order Details</h2>
-
-  <div class="mb-4">
+  
+   <div class="mb-4">
     <strong>Order ID:</strong> <?php echo $order['id']; ?><br>
     <strong>Order Date:</strong> <?php echo date('Y-m-d H:i', strtotime($order['created_at'])); ?><br>
     <strong>Payment Method:</strong> <?php echo ucfirst($order['payment_method']); ?><br>
